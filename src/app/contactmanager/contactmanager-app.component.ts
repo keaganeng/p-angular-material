@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-contactmanager-app',
   template: `
-    <app-side-nav></app-side-nav>
+    <app-sidenav></app-sidenav>
   `,
   styles: [
   ]

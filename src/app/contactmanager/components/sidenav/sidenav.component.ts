@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
@@ -9,23 +9,23 @@ import { MatSidenav } from '@angular/material/sidenav';
 const SMALL_WIDTH_BREAKPOINT = 720;
 
 @Component({
-  selector: 'app-side-nav',
-  templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.scss']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss']
 })
 export class SideNavComponent implements OnInit {
 
-  public isScreenSmall: boolean | undefined;
+  public isScreenSmall: boolean;
 
-  users: Observable<User[]> | undefined;
+  users: Observable<User[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private userService: UserService,
     private router: Router) { }
 
-  @ViewChildren(MatSidenav)
-  sidenav!: MatSidenav;
+  @ViewChild(MatSidenav)
+  sidenav: MatSidenav;
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -40,6 +40,7 @@ export class SideNavComponent implements OnInit {
       this.router.events.subscribe(() => {
         if (this.isScreenSmall) {
           // TODO close our sidenav
+          console.log(this.sidenav);
           this.sidenav.close();
         }
       });
